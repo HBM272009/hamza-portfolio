@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta description helps search engines understand what your site is about -->
+    <meta name="description" content="Hamza - Développeur Frontend Portfolio">
+    <title>Hamza | Développeur Frontend</title>
+    
+    <!-- We load "Outfit", a clean and modern font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons is an icon library that gives us the cool symbols (rocket, mobile, etc) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Connect our custom CSS file to style the page -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<!-- We set the default mode to "light". Our script.js will toggle this class to "dark" later -->
+<body class="light">
+    
+    <!-- The header stays at the top of the screen -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Hamza</div>
+                
+                <!-- We group everything on the right side of the nav bar here -->
+                <div class="nav-right">
+                    <a href="#projets" class="nav-link">Voir mes projets</a>
+                    <a href="#contact" class="btn-primary btn-small">Me contacter</a>
+                    
+                    <!-- The button that triggers the light/dark mode switch -->
+                    <button class="theme-toggle" id="theme-btn" aria-label="Toggle Dark Mode">
+                       <!-- We use a moon icon by default. The JS will change it to a sun when clicked -->
+                       <i id="theme-icon" class="ph-fill ph-moon"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+        <!-- HERO SECTION: The very first thing the user sees -->
+        <section class="hero scroll-reveal">
+            <div class="container hero-content">
+                
+                <!-- Left half: Text and Icons -->
+                <div class="hero-text">
+                   <h1>Hamza<br/><span class="text-gradient">Développeur<br/>Frontend</span></h1>
+                   
+                   <p class="hero-subtitle">Je conçois des sites web modernes, responsives et optimisés pour aider les entreprises à développer leur présence en ligne.</p>
+
+                   <!-- Flexbox row keeps our icons neat and centered -->
+                   <div class="tech-stack-row">
+                       <div class="tech-icon" title="HTML5"><i class="ph-fill ph-file-html"></i></div>
+                       <div class="tech-icon" title="CSS3"><i class="ph-fill ph-file-css"></i></div>
+                       <div class="tech-icon" title="JavaScript"><i class="ph-fill ph-file-js"></i></div>
+                       <div class="tech-icon" title="React"><i class="ph-fill ph-atom"></i></div>
+                   </div>
+                </div>
+
+                <!-- Right half: A web-developer focused graphic (Browser Mockup) -->
+                <div class="hero-visual">
+                    <div class="browser-mockup glass-panel glass-border">
+                        <!-- Top bar of the browser window -->
+                        <div class="browser-header">
+                            <div class="browser-dot"></div>
+                            <div class="browser-dot"></div>
+                            <div class="browser-dot"></div>
+                        </div>
+                        <!-- Inside the browser: abstract code blocks -->
+                        <div class="browser-body">
+                            <div class="code-line w-80"></div>
+                            <div class="code-line w-40 accent"></div>
+                            <div class="code-line w-60"></div>
+                            <div class="code-line w-80"></div>
+                            <br>
+                            <div class="code-line w-60 accent"></div>
+                            <div class="code-line w-40"></div>
+                            <div class="code-line w-80"></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- FEATURES GRID: Explaining exactly what you do -->
+        <section id="projets" class="features scroll-reveal">
+            <div class="container">
+                <div class="features-header text-center">
+                    <h2>Créer des interfaces <span class="text-gradient">pixel-perfect</span> qui s'adaptent au web moderne</h2>
+                    <p>Des mises en page réactives aux animations fluides, je conçois des expériences numériques esthétiques et performantes.</p>
+                </div>
+                
+                <!-- CSS Grid arranges these boxes neatly -->
+                <div class="features-grid">
+                    
+                    <!-- 'span-2' makes this first card very wide -->
+                    <div class="feature-card glass-panel glass-border span-2">
+                        <div class="feature-visual">
+                            <i class="ph-duotone ph-rocket-launch"></i>
+                        </div>
+                        <div class="feature-info">
+                            <i class="ph-fill ph-cube accent-icon"></i>
+                            <h3>Le bon développement web consiste à rendre la complexité incroyablement simple pour l'utilisateur.</h3>
+                            <p class="author">&mdash; Hamza</p>
+                        </div>
+                    </div>
+
+                    <!-- Regular cards -->
+                    <div class="feature-card glass-panel glass-border">
+                        <div class="feature-visual">
+                            <i class="ph-duotone ph-magic-wand"></i>
+                        </div>
+                        <div class="feature-info">
+                            <i class="ph-fill ph-sparkle accent-icon"></i>
+                            <h3>Interactions Dynamiques</h3>
+                            <p>Utilisation de React pour donner vie à des designs statiques avec des animations haut de gamme.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-card glass-panel glass-border">
+                        <div class="feature-visual">
+                            <i class="ph-duotone ph-lightning"></i>
+                        </div>
+                        <div class="feature-info">
+                            <i class="ph-fill ph-gauge accent-icon"></i>
+                            <h3>Performance Optimisée</h3>
+                            <p>Écriture d'un code propre garantissant des temps de chargement éclair et des scores Google parfaits.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SERVICES / TECH STACK SECTION -->
+        <section class="tech-stack scroll-reveal">
+            <div class="container">
+                <h2 class="section-title text-center">Transformer des idées complexes en expériences web <span class="text-gradient">interactives</span></h2>
+                
+                <div class="tech-cards">
+                    <div class="tech-card glass-panel glass-border">
+                       <div class="tech-logo text-gradient"><i class="ph-fill ph-browser"></i></div>
+                       <p><strong>Landing Pages sur mesure:</strong> Création de sites vitrines conçus spécifiquement pour convertir vos visiteurs en clients.</p>
+                    </div>
+                    
+                    <div class="tech-card glass-panel glass-border">
+                       <div class="tech-logo text-gradient"><i class="ph-fill ph-devices"></i></div>
+                       <p><strong>Refonte de Sites Web:</strong> Modernisation de vos interfaces existantes pour les rendre rapides, sécurisées et responsives.</p>
+                    </div>
+                    
+                    <div class="tech-card glass-panel glass-border">
+                       <div class="tech-logo text-gradient"><i class="ph-fill ph-code"></i></div>
+                       <p><strong>Développement Frontend:</strong> Maîtrise de l'écosystème React, HTML/CSS, et JavaScript pour des sites interactifs très fluides.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ROBUST CODE / INQUIRY FORM SECTION: Showcasing a clean client form -->
+        <section class="robust-code scroll-reveal">
+            <div class="container split-layout">
+                
+                <!-- Left: Text -->
+                <div class="text-content">
+                    <h2>Un code robuste pour une <span class="text-gradient">tranquillité d'esprit</span></h2>
+                    <p>J'écris un code propre, testé et maintenable, garantissant des sites web fiables qui ne cassent pas à la moindre mise à jour.</p>
+                    <ul class="checklist">
+                        <li><i class="ph-fill ph-check-circle"></i> Design Adaptatif (Téléphone & PC)</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Optimisation SEO de base</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Maintenance Facile</li>
+                    </ul>
+                </div>
+                
+                <!-- Right: Client Inquiry Form Form Mockup -->
+                <div class="visual-content">
+                    <div class="form-mockup glass-panel glass-border">
+                        <div class="field">
+                            <label>Nom ou Entreprise</label>
+                            <input type="text" placeholder="Ex: Acme Corp">
+                        </div>
+                        <div class="field">
+                            <label>Type de Projet</label>
+                            <select>
+                                <option>Landing Page (Site Vitrine)</option>
+                                <option>Refonte de site</option>
+                                <option>E-commerce simple</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Détails du besoin</label>
+                            <input type="text" placeholder="J'ai besoin d'un portfolio... ">
+                        </div>
+                        <button class="btn-mockup">Envoyer la demande</button>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+
+        <!-- FINAL CALL TO ACTION (CTA) -->
+        <section id="contact" class="cta scroll-reveal">
+            <div class="container">
+                <div class="cta-box glass-panel glass-border text-center">
+                    <h2 class="mb-2">Donnons vie à votre prochain projet web ensemble</h2>
+                    <button class="btn-primary btn-large mb-2"><i class="ph-fill ph-paper-plane-tilt"></i> Demander un devis</button>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-links">
+                    <strong>Navigation</strong>
+                    <a href="#">Accueil</a>
+                    <a href="#projets">Services</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                
+                <div class="footer-contact">
+                    <p>Restons en contact</p>
+                    <!-- A neat input field grouped with a button -->
+                    <div class="contact-form">
+                        <input type="email" placeholder="votre@email.com">
+                        <button><i class="ph-fill ph-paper-plane-right"></i></button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- We link our Javascript file at the very bottom so it loads after the HTML is ready -->
+    <script src="js/script.js"></script>
+</body>
+</html>

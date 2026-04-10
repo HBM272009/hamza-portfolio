@@ -1,0 +1,628 @@
+/* 
+  ========================================
+  1. CSS VARIABLES (THEMING)
+  ========================================
+  Variables let us define colors once and reuse them everywhere.
+  By default, we set these to our "Light Mode" colors.
+*/
+:root {
+  /* Light Theme Variables (Default) */
+  --bg-color: #ffffff;          /* The main background color of the page */
+  --bg-secondary: #f8fafc;      /* A slightly darker background for alternate sections */
+  --text-primary: #0f172a;      /* Main text color (very dark gray/black) */
+  --text-secondary: #475569;    /* Lighter text for subtitles */
+  --text-muted: #94a3b8;        /* Very light text for small details */
+  
+  --accent-color: #2563eb;      /* The main brand color (Blue) */
+  --accent-hover: #1d4ed8;      /* The brand color when hovered */
+  
+  --card-bg: rgba(255, 255, 255, 0.8); /* Card backgrounds */
+  --border-color: rgba(0, 0, 0, 0.1);  /* Subtle borders for cards */
+  --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  --header-bg: rgba(255, 255, 255, 0.8);
+
+  /* Gradients for text or backgrounds */
+  --gradient-accent: linear-gradient(135deg, #2563eb, #8b5cf6);
+  --gradient-orange: linear-gradient(135deg, #f15a24, #ff9e7d);
+  --gradient-blue: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  --gradient-yellow: linear-gradient(135deg, #facc15, #f59e0b);
+
+  /* Rounded corners */
+  --border-radius-lg: 24px;
+  --border-radius-md: 16px;
+  --border-radius-sm: 8px;
+}
+
+/* 
+  DARK MODE VARIABLES
+  When the user clicks the toggle button, we add the class "dark" to the <body>.
+  These variables will then OVERWRITE the light variables above!
+*/
+body.dark {
+  --bg-color: #050505;
+  --bg-secondary: #0a0a0a;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --card-bg: rgba(255, 255, 255, 0.03); 
+  --border-color: rgba(255, 255, 255, 0.08);
+  --shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  --header-bg: rgba(5, 5, 5, 0.8);
+}
+
+
+/* 
+  ========================================
+  2. GLOBAL RESET & BASE STYLES
+  ========================================
+  This removes default browser padding and margins so our design is consistent.
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding doesn't affect width/height */
+}
+
+html {
+  scroll-behavior: smooth; /* Makes clicking navigation links slide smoothly */
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-color); /* Uses the variable defined above */
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for dark mode */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* 
+  ========================================
+  3. UTILITY CLASSES
+  ========================================
+  Reusable classes we can apply to any HTML element.
+*/
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px); /* Creates the frosted glass effect */
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.glass-border {
+  border: 1px solid var(--border-color);
+}
+
+/* Makes text look like a gradient */
+.text-gradient {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-center { text-align: center; }
+.mb-2 { margin-bottom: 1.5rem; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1.5rem; }
+.text-sm { font-size: 0.875rem; color: var(--text-muted); }
+
+
+/* 
+  ========================================
+  4. HEADER & NAVIGATION
+  ========================================
+*/
+header {
+  position: fixed; /* Header stays at the top when scrolling */
+  top: 0;
+  width: 100%;
+  backdrop-filter: blur(12px);
+  background-color: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 50; /* Ensures the header stays above other content */
+  height: auto; /* Let it grow if it wraps */
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0; /* Extra padding in case items wrap */
+  flex-wrap: wrap; /* Allows text/buttons to go to the next line on small screens */
+  gap: 1rem;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.5px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap; /* Prevents squishing on mobile */
+}
+
+.nav-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.3s;
+}
+.nav-link:hover {
+  color: var(--text-primary);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 99px; /* Fully rounded pill shape */
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px); /* Button moves up slightly when hovered */
+}
+.btn-small { padding: 0.6rem 1.25rem; font-size: 0.9rem; }
+.btn-large { padding: 1rem 2rem; font-size: 1.1rem; }
+
+/* Dark mode toggle button */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+.theme-toggle:hover {
+  background: var(--border-color);
+}
+
+
+/* 
+  ========================================
+  5. LAYOUT BLOCKS
+  ========================================
+*/
+section {
+  padding: 100px 0; /* Huge breathing space between sections */
+}
+.section-title {
+  /* clamp() automatically shrinks font size on mobile and grows on desktop! */
+  font-size: clamp(2rem, 4vw, 3rem); 
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 3rem;
+  letter-spacing: -1px;
+}
+
+
+/* 
+  ========================================
+  6. HERO SECTION
+  ========================================
+*/
+.hero {
+  padding-top: 150px;
+  padding-bottom: 100px;
+}
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+}
+.hero-text {
+  flex: 1; /* Takes up left half of the flex container */
+}
+.hero-text h1 {
+  font-size: clamp(3rem, 6vw, 5.5rem); 
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 2rem;
+}
+.hero-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin-bottom: 2.5rem;
+}
+
+/* Flexbox Row for Tech Icons */
+.tech-stack-row {
+  display: flex; /* Lines items up left-to-right */
+  align-items: center;
+  gap: 1rem;
+}
+.tech-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-sm);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;             /* Centers the icon vertically */
+  justify-content: center;         /* Centers the icon horizontally */
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  transition: color 0.3s, transform 0.3s, border-color 0.3s;
+}
+.tech-icon:hover {
+  transform: translateY(-3px);
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+/* Browser Window Mockup (Web Dev Theme) */
+.hero-visual {
+  flex: 1; /* Takes up right half */
+  display: flex;
+  justify-content: flex-end;
+}
+.browser-mockup {
+  width: 100%;
+  max-width: 500px;
+  height: 400px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-color);
+}
+.browser-header {
+  height: 40px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 8px;
+}
+/* The three dots in the top left of a Mac browser */
+.browser-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--border-color);
+}
+.browser-body {
+  flex: 1;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.code-line {
+  height: 12px;
+  border-radius: 6px;
+  background: var(--border-color);
+}
+.code-line.w-80 { width: 80%; }
+.code-line.w-60 { width: 60%; margin-left: 20px;}
+.code-line.w-40 { width: 40%; margin-left: 40px;}
+.code-line.accent { background: var(--accent-color); opacity: 0.5;}
+
+
+/* 
+  ========================================
+  7. FEATURES GRID 
+  ========================================
+*/
+.features-header {
+  max-width: 600px;
+  margin: 0 auto 4rem;
+}
+.features-header h2 {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+.features-header p {
+  color: var(--text-secondary);
+}
+
+/* CSS Grid helps us perfectly align the cards 2 by 2 */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns of equal size */
+  gap: 1.5rem; /* Space between rows and columns */
+}
+.feature-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  transition: transform 0.3s ease;
+}
+.feature-card:hover { transform: translateY(-3px); }
+
+.feature-visual {
+  border-radius: var(--border-radius-md);
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+/* Special rule for the first card to span across BOTH columns */
+.feature-card.span-2 {
+  grid-column: span 2; 
+  flex-direction: row; /* Puts visual and text side-by-side */
+  align-items: center;
+}
+.feature-card.span-2 .feature-visual {
+  flex: 1.5;
+  height: 300px;
+}
+.feature-card.span-2 .feature-info {
+  flex: 1;
+  padding-left: 2rem;
+}
+
+.feature-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.accent-icon {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+}
+.feature-info h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+
+
+/* 
+  ========================================
+  8. TECH STACK CARDS
+  ========================================
+*/
+.tech-stack {
+  background: var(--bg-secondary);
+}
+.tech-stack .section-title {
+  max-width: 800px;
+  margin: 0 auto 4rem;
+}
+.tech-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns */
+  gap: 1.5rem;
+}
+.tech-card {
+  padding: 32px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.tech-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-color);
+}
+.tech-logo {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+
+/* 
+  ========================================
+  9. SPLIT LAYOUT (ROBUST CODE / INQUIRY FORM)
+  ========================================
+*/
+.split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two halves */
+  gap: 4rem;
+  align-items: center;
+}
+.text-content h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1px;
+}
+.text-content p {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+}
+.checklist {
+  list-style: none; /* Removes bullet points */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+}
+.checklist i { color: var(--accent-color); font-size: 1.25rem; }
+
+/* The new client inquiry form mockup */
+.form-mockup {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field label { 
+  font-size: 0.85rem; 
+  color: var(--text-secondary); 
+  text-transform: uppercase; 
+  letter-spacing: 1px;
+}
+.field input, .field select {
+  background: var(--bg-bgcolor);
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  border-radius: var(--border-radius-sm);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+/* Custom mock submit button */
+.btn-mockup {
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--border-radius-md);
+  background: var(--text-primary);
+  color: var(--bg-color); /* Reverses colors for solid block look */
+  border: none;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+
+/* 
+  ========================================
+  10. CTA & FOOTER
+  ========================================
+*/
+.cta {
+  padding-bottom: 120px;
+}
+.cta-box {
+  padding: 64px 32px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.cta-box h2 {
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+footer {
+  border-top: 1px solid var(--border-color);
+  padding: 64px 0 32px;
+  background: var(--bg-secondary);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-links a:hover { color: var(--accent-color); }
+
+.contact-form {
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  max-width: 300px;
+}
+.contact-form input {
+  flex: 1;
+  background: var(--bg-color);
+  border: none;
+  padding: 12px 16px;
+  color: var(--text-primary);
+  outline: none;
+}
+.contact-form button {
+  background: var(--border-color);
+  border: none;
+  padding: 0 16px;
+  color: var(--text-primary);
+}
+
+
+/* 
+  ========================================
+  11. RESPONSIVE DESIGN & ANIMATIONS
+  ========================================
+*/
+
+/* Scroll reveal classes toggled by JavaScript */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.scroll-reveal.visible {
+  opacity: 1;      /* Fade in */
+  transform: translateY(0); /* Slide into place */
+}
+
+/* Fixes for Mobile Screens (< 900px) */
+@media (max-width: 900px) {
+  nav {
+    justify-content: center; /* Centers the logo on mobile */
+    padding-bottom: 1rem;
+  }
+  .nav-right {
+    justify-content: center; /* Centers the list of links */
+    width: 100%;             /* Takes full width so links sit under logo nicely */
+  }
+
+  .hero-content { flex-direction: column; text-align: center; }
+  .hero-text { align-items: center; display: flex; flex-direction: column; }
+  .hero-visual { justify-content: center; width: 100%;}
+  .tech-stack-row { justify-content: center; }
+  
+  .features-grid { grid-template-columns: 1fr; }
+  .feature-card.span-2 { grid-column: span 1; flex-direction: column; }
+  .feature-card.span-2 .feature-info { padding-left: 0; margin-top: 1rem; }
+  
+  .tech-cards { grid-template-columns: 1fr; }
+  .split-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
